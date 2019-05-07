@@ -4,41 +4,44 @@
 	<meta name="viewport" content="initial-scale=1">
 	<meta charset="utf-8" />
 	<title>szablon</title>
-	<script src="jquery-3.3.1.min.js"></script>
+	<script src="jquery-3.4.1.min.js"></script>
 </head>
 <body>
 
-<button>dwqdw</button>
+<button id="show">dwqdw</button>
+
+<button id="remove">dodaj</button>
 	<script>
 	//https://kursjs.pl/kurs/ajax/fetch.php
-			var mojObiekt = {enu:'json'};
-					
-			$.ajax({
+	
+			
+			//wyświetlanie zawartości jsona
+			$("#show").on("click", ()=>{
+				$.ajax({
 				url: 'https://szymekcendecki.github.io/testJson/testJson.json',
 				dataType: 'json',
 				type: 'get'
 			}).done(function(response){
+				console.log(response.menu);
+			}).fail(function(error){
+				console.log(error);
+			});
+			});
+
+			$("#remove").on("click", ()=>{
+				$.ajax({
+				url: 'https://szymekcendecki.github.io/testJson/testJson.json/',
+				type: 'POST',
+				data: { imie: 'Alicja' },
+				dataType: 'json'
+			}).done(function(response){
 				console.log(response);
 			}).fail(function(error){
 				console.log(error);
-			})
-			
-			
-			$("button").on("click", ()=>{
-				$.ajax({
-					url: "https://szymekcendecki.github.io/testJson/testJson.json",
-					method : "post",
-					data : { //na serwer trafią dwie dane - name i pet
-						name : "Marcin",
-						pet : "Super Szamson"
-					},
-					dataType : "json" //oczekujemy odpowiedzi w formacie json
-				}).done(function(response) {
-					console.log(response);
-				}).fail(function() {
-					console.log( "Wystąpił błąd" ); //pokazujemy użytkownikowi komunikat
-				});
 			});
+			});
+
+
 	</script>
 
 	
